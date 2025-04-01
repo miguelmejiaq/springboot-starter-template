@@ -11,14 +11,14 @@ import com.example.miguelmejiaq.labs.docker_lab.response.InfoResponse;
 
 @RestController
 @RequestMapping("/api/info")
-public class TestController {
+public class InfoController {
     @Value("${environment.name}")
     String environment;
 
     @Autowired
     BuildProperties buildProperties;
 
-    TestController(){}
+    InfoController(){}
 
     @GetMapping("/")
     InfoResponse getEnvironment(){

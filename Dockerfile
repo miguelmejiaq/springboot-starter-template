@@ -7,13 +7,14 @@ COPY src ./src
 
 RUN gradle build -x test
 
+RUN VERSION=$(gradle properties --no-daemon --console=plain -q | grep "^version:" | awk '{printf $2}') \
+    && mv build/libs/docker-lab-${VERSION}.jar build/libs/docker-lab-app.jar
+
 FROM amazoncorretto:23-alpine-jdk
 
 WORKDIR /app
 
-ARG API_VERSION=""
-
-COPY --from=build /app/build/libs/docker-lab-${API_VERSION}.jar app.jar
+COPY --from=build /app/build/libs/docker-lab-app.jar app.jar
 
 COPY entrypoint.sh .
 
