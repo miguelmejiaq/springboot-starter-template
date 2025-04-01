@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: docker-lab
+
+environment:
+  name: Production
